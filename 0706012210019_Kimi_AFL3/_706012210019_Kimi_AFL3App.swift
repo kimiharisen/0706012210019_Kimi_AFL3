@@ -17,5 +17,8 @@ struct _706012210019_Kimi_AFL3App: App {
             ContentView()
                 .environment(modelData)
         }
+        #if os(watchOS)
+        WKNotificationScene(controller: NotificationController.self, category: "LandmarkNear")
+        #endif
     }
 }

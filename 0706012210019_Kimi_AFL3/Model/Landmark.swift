@@ -1,14 +1,13 @@
 //
 //  Landmark.swift
-//  0706012210019_Kimi_AFL3
+//  Michael DS_MAD_Week 9_AFL3
 //
-//  Created by MacBook Pro on 25/04/24.
+//  Created by student on 19/04/24.
 //
 
 import Foundation
 import SwiftUI
 import CoreLocation
-
 
 struct Landmark: Hashable, Codable, Identifiable {
     var id: Int
@@ -17,13 +16,22 @@ struct Landmark: Hashable, Codable, Identifiable {
     var state: String
     var description: String
     var isFavorite: Bool
+    var isFeatured: Bool
 
+    var category: Category
+    enum Category: String, CaseIterable, Codable {
+        case lakes = "Lakes"
+        case rivers = "Rivers"
+        case mountains = "Mountains"
+    }
 
     private var imageName: String
     var image: Image {
         Image(imageName)
     }
-
+    var featureImage: Image? {
+        isFeatured ? Image(imageName + "_feature") : nil
+    }
 
     private var coordinates: Coordinates
     var locationCoordinate: CLLocationCoordinate2D {
@@ -31,7 +39,6 @@ struct Landmark: Hashable, Codable, Identifiable {
             latitude: coordinates.latitude,
             longitude: coordinates.longitude)
     }
-
 
     struct Coordinates: Hashable, Codable {
         var latitude: Double

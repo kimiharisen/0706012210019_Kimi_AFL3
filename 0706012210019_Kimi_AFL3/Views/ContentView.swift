@@ -1,15 +1,34 @@
 //
 //  ContentView.swift
-//  0706012210019_Kimi_AFL3
+//  Michael DS_MAD_Week 9_AFL3
 //
-//  Created by MacBook Pro on 19/04/24.
+//  Created by Michael Sin on 25/04/24.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection: Tab = .featured
+
+    enum Tab {
+        case featured
+        case list
+    }
+
     var body: some View {
-        LandmarkList()
+        TabView(selection: $selection) {
+            CategoryHome()
+                .tabItem {
+                    Label("Featured", systemImage: "star")
+                }
+                .tag(Tab.featured)
+
+            LandmarkList()
+                .tabItem {
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tab.list)
+        }
     }
 }
 
